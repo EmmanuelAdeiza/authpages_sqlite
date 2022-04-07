@@ -3,9 +3,12 @@
 import 'package:authpages_sqlite/components/reusable_button.dart';
 import 'package:authpages_sqlite/components/reusable_icon_container.dart';
 import 'package:authpages_sqlite/components/reusable_text_container.dart';
+import 'package:authpages_sqlite/db_operations.dart';
+import 'package:authpages_sqlite/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -18,9 +21,9 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    String firstName;
-    String lastName;
-    String email;
+    String firstName = '';
+    String lastName = '';
+    String email = '';
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
@@ -118,20 +121,24 @@ class _SignUpState extends State<SignUp> {
                             hintText: "First Name",
                             onChanged: (value) {
                               firstName = value;
+                              print(firstName);
                             },
                           ),
                           SizedBox(
                             height: 15,
                           ),
-                          ReusableTextContainer(hintText: "Last Name",
+                          ReusableTextContainer(
+                            hintText: "Last Name",
                             onChanged: (value) {
                               lastName = value;
+                              print(lastName);
                             },
                           ),
                           SizedBox(
                             height: 15,
                           ),
-                          ReusableTextContainer(hintText: "Email",
+                          ReusableTextContainer(
+                            hintText: "Email",
                             onChanged: (value) {
                               email = value;
                             },
@@ -154,8 +161,17 @@ class _SignUpState extends State<SignUp> {
                             text: "Sign up",
                             textColor: themeSecColor,
                             bodyColor: themeColor,
-                            onTap: () {
-                              print("Signed In!!!");
+                            onTap: () async {
+                              print("object");
+                              DBOperations(db)
+                                  .insertRecord(firstName, lastName, email);
+
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setString('email', email);
+                              print("added $firstName $lastName");
+
+                              print("Signed Up!!!");
                             },
                           ),
                           SizedBox(

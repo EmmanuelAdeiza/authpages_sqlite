@@ -6,6 +6,7 @@ import 'package:authpages_sqlite/components/reusable_text_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
-    String email;
+    String email = '';
     String password;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
@@ -145,7 +146,12 @@ class _LogInState extends State<LogIn> {
                             text: "Sign In",
                             textColor: Colors.white,
                             bodyColor: themeColor,
-                            onTap: () {
+                            onTap: () async {
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+
+                              prefs.setString('email', email);
+
                               print("Signed In!!!");
                               Navigator.pushNamed(context, '/homepage');
                             },

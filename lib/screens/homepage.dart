@@ -3,6 +3,7 @@
 import 'package:authpages_sqlite/components/reusable_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -51,7 +52,10 @@ class _HomePageState extends State<HomePage> {
               text: "Log out",
               textColor: Colors.white,
               bodyColor: Colors.blue,
-              onTap: () {
+              onTap: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.remove('email');
+
                 Navigator.pushNamed(context, '/signup');
               },
             ),

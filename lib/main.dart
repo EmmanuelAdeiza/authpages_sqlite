@@ -1,14 +1,17 @@
 
 import 'package:authpages_sqlite/app_database.dart';
-import 'package:authpages_sqlite/db_operations.dart';
-import 'package:authpages_sqlite/myapp.dart';
+import 'package:authpages_sqlite/global.dart';
+import 'package:authpages_sqlite/screens/homepage.dart';
+import 'package:authpages_sqlite/screens/welcome_page.dart';
 import 'package:flutter/material.dart';
 
-void main() async {
+import 'package:shared_preferences/shared_preferences.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  final db = await AppDatabase().initDB();
-  DBOperations(db).insertRecord("Hello", "More");
-
-  runApp(MyApp());
+  db = await AppDatabase().initDB();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? email = prefs.getString("email");
+  print("logged in User:" + email.toString());
+  runApp(MaterialApp(home: email == null ? WelcomePage() : HomePage()));
 }
