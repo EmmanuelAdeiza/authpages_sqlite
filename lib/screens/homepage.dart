@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:authpages_sqlite/components/reusable_button.dart';
+import 'package:authpages_sqlite/screens/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,8 +56,14 @@ class _HomePageState extends State<HomePage> {
               onTap: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('email');
-
-                Navigator.pushNamed(context, '/signup');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return WelcomePage();
+                    },
+                  ),
+                );
               },
             ),
           ]),

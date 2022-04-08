@@ -12,6 +12,6 @@ Future<void> main() async {
   db = await AppDatabase().initDB();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? email = prefs.getString("email");
-  print("logged in User:" + email.toString());
+  // print("logged in User:" + email);
   runApp(MaterialApp(home: email == null ? WelcomePage() : HomePage()));
 }
