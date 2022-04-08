@@ -5,6 +5,8 @@ import 'package:authpages_sqlite/components/reusable_icon_container.dart';
 import 'package:authpages_sqlite/components/reusable_text_container.dart';
 import 'package:authpages_sqlite/db_operations.dart';
 import 'package:authpages_sqlite/global.dart';
+import 'package:authpages_sqlite/screens/homepage.dart';
+import 'package:authpages_sqlite/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -170,7 +172,14 @@ class _SignUpState extends State<SignUp> {
                                   await SharedPreferences.getInstance();
                               prefs.setString('email', email);
                               print("added $firstName $lastName");
-
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return HomePage();
+                                  },
+                                ),
+                              );
                               print("Signed Up!!!");
                             },
                           ),
@@ -215,7 +224,14 @@ class _SignUpState extends State<SignUp> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.pushNamed(context, '/login');
+                                                      Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return LogIn();
+                                      },
+                                    ),
+                                  );
                                 },
                                 child: Text(
                                   "Sign in!",

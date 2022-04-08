@@ -15,15 +15,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       
-     initialRoute: '/',
-     routes: {
-       '/' : (context) =>  WelcomePage(),
-       '/login': (context) =>  LogIn(),
-       '/signup': (context) => SignUp(),
-        '/homepage': (context) => HomePage(),
 
+       home: WelcomePage()
 
-     },
     );
   }
 }

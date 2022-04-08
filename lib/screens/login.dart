@@ -3,6 +3,8 @@
 import 'package:authpages_sqlite/components/reusable_button.dart';
 import 'package:authpages_sqlite/components/reusable_icon_container.dart';
 import 'package:authpages_sqlite/components/reusable_text_container.dart';
+import 'package:authpages_sqlite/screens/homepage.dart';
+import 'package:authpages_sqlite/screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -153,7 +155,14 @@ class _LogInState extends State<LogIn> {
                               prefs.setString('email', email);
 
                               print("Signed In!!!");
-                              Navigator.pushNamed(context, '/homepage');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return HomePage();
+                                  },
+                                ),
+                              );
                             },
                           ),
                           SizedBox(
@@ -198,7 +207,14 @@ class _LogInState extends State<LogIn> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.pushNamed(context, '/signup');
+                              Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return SignUp();
+                                      },
+                                    ),
+                                  );
                                 },
                                 child: Text(
                                   "Sign up!",

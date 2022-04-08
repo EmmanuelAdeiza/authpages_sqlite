@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:authpages_sqlite/screens/login.dart';
+import 'package:authpages_sqlite/screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:authpages_sqlite/components/reusable_button.dart';
-import 'package:lottie/lottie.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -82,7 +83,15 @@ class _WelcomePageState extends State<WelcomePage> {
                   textColor: Colors.white,
                   bodyColor: themeColor,
                   onTap: () {
-                    Navigator.pushNamed(context, '/signup');
+                           Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return SignUp();
+                        },
+                      ),
+                    );
+                  
                   },
                 ),
                 SizedBox(
@@ -93,7 +102,14 @@ class _WelcomePageState extends State<WelcomePage> {
                   textColor: themeColor,
                   bodyColor: Colors.white,
                   onTap: () {
-                    Navigator.pushNamed(context, '/login');
+                                              Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return LogIn();
+                        },
+                      ),
+                    );
                   },
                 )
               ]),
